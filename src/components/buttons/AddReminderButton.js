@@ -8,7 +8,7 @@ const AddReminderButton = () => {
     const dispatch = useDispatch();
 
     return (
-        <div className="plusButton">
+        <div className="plusButton" id="add-reminder">
             <Fab onClick={() => dispatch(selectReminder({}))}>
                 <AddIcon />
             </Fab>

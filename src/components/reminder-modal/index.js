@@ -48,6 +48,7 @@ const ReminderModal = () => {
                 <DialogTitle>Reminder</DialogTitle>
                 <DialogContent>
                     <TextField
+                        id="title"
                         autoFocus
                         onChange={(e) => updateValue('title', e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' ? handleSaveButton() : ''}
@@ -61,17 +62,20 @@ const ReminderModal = () => {
                     />
                     <br/><br/>
                     <TextField
+                        id="date"
                         type="date"
                         defaultValue={currentDate}
                         onChange={e => updateValue('date', new Date(e.target.value))}
                     />
                     <TextField
+                        id="time"
                         type="time"
                         defaultValue={currentTime}
                         onChange={e => updateValue('time', e.target.value)}
                     />
                     <FormControl>
                         <Select
+                            id="color-picker"
                             value={currentColor}
                             style={{color: currentColor}}
                         >
@@ -90,13 +94,13 @@ const ReminderModal = () => {
                 <DialogActions className="bottomButtons">
                     <Col>
                         {showDeleteButton
-                            ? <Button onClick={() => dispatch(deleteReminder(reminder))}>Delete</Button>
+                            ? <Button id="delete" onClick={() => dispatch(deleteReminder(reminder))}>Delete</Button>
                             : <></>
                         }
                     </Col>
                     <Col>
                         <Button onClick={() => closeModal()}>Cancel</Button>
-                        <Button onClick={() => handleSaveButton()}>Save</Button>
+                        <Button id="save" onClick={() => handleSaveButton()}>Save</Button>
                     </Col>
                 </DialogActions>
             </Dialog>
