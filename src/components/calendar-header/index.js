@@ -9,25 +9,26 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Fab} from "@mui/material";
+import './styles.css';
 
 const CalendarHeader = ({currentDate, increaseCurrentMonth, decreaseCurrentMonth}) => {
     const monthName = dateToMonthEnUs(currentDate);
 
     return (
-        <Row fluid="true">
+        <Row fluid="true" className="calendarHeader">
             <Col>
                 <Fab onClick={() => decreaseCurrentMonth(12)}>
                     <ArrowBackIosIcon />
                 </Fab>
-                <Fab onClick={() => decreaseCurrentMonth(1)}>
+                <Fab onClick={() => decreaseCurrentMonth(1)} size="small">
                     <ArrowBackIcon />
                 </Fab>
             </Col>
-            <Col>
+            <Col className="date">
                 {`${monthName} ${currentDate.getFullYear()}`}
             </Col>
             <Col>
-                <Fab onClick={() => increaseCurrentMonth(1)}>
+                <Fab onClick={() => increaseCurrentMonth(1)} size="small">
                     <ArrowForwardIcon />
                 </Fab>
                 <Fab onClick={() => increaseCurrentMonth(12)}>

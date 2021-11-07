@@ -1,0 +1,49 @@
+p {
+    margin-bottom: 0;
+}
+
+thead tr {
+    font-family: 'Open sans', sans-serif;
+    color: white;
+}
+
+th {
+    width: 6.5%
+}
+
+td {
+    border-bottom-width: 1px;
+}
+
+tbody tr {
+    height: 80px;
+}
+
+.task {
+    text-align: start;
+}
+
+.hovered {
+    background: cornflowerblue;
+    border-color: white;
+    border-style: solid;
+    vertical-align: top;
+}
+
+.sameMonth {
+    border-color: white;
+    border-style: solid;
+    background: gray;
+    vertical-align: top;
+}
+
+.otherMonth {
+    border-color: white;
+    border-style: solid;
+    background: lightgray;
+    vertical-align: top;
+}
+
+.day {
+
+}

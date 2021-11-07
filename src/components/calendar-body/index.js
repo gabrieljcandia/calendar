@@ -1,11 +1,11 @@
 import React from "react";
-import {Container, Row} from "react-bootstrap";
 import _ from "lodash";
 import {getDatesAfterMonth, getDatesBeforeMonth, getDatesOfMonth} from "./logic";
 import {selectCurrentDate} from "../../store/date/reducer";
 import {connect} from "react-redux";
 import DaysOfWeek from "./DaysOfWeek";
 import Day from "./Day";
+import './styles.css';
 
 export const ROWS = 6;
 export const DAYS_OF_WEEK_COUNT = 7;
@@ -18,28 +18,30 @@ const CalendarBody = ({currentDate}) => {
     const datesToShow = _.union(datesBeforeMonth, datesOfMonth, datesAfterMonth);
 
     return (
-        <Container fluid>
+        <table>
             <DaysOfWeek/>
-            {_.chunk(datesToShow, DAYS_OF_WEEK_COUNT).map((daysRow, rowIndex) =>
-                <DaysRow
-                    key={rowIndex}
-                    days={daysRow}
-                />
-            )}
-        </Container>
+            <tbody>
+                {_.chunk(datesToShow, DAYS_OF_WEEK_COUNT).map((daysRow, rowIndex) =>
+                    <DaysRow
+                        key={rowIndex}
+                        days={daysRow}
+                    />
+                )}
+            </tbody>
+        </table>
     );
 };
 
 const DaysRow = ({days}) => {
     return (
-        <Row xs={DAYS_OF_WEEK_COUNT}>
+        <tr>
             {days.map(day =>
                 <Day
                     key={day.toLocaleString()}
                     day={day}
                 />
             )}
-        </Row>
+        </tr>
     );
 };
 

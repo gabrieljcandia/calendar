@@ -1,6 +1,5 @@
 const colors = [
     "olive",
-    "gray",
     "aqua",
     "brown",
     "tomato",

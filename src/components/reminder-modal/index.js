@@ -50,6 +50,7 @@ const ReminderModal = () => {
                     <TextField
                         autoFocus
                         onChange={(e) => updateValue('title', e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' ? handleSaveButton() : ''}
                         label="Title"
                         type="text"
                         fullWidth
