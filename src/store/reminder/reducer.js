@@ -38,6 +38,11 @@ const reducer = (state = initialState, action) => {
                 all: _.map(state.all, reminder => reminder.id === state.selected.id ? {...state.selected} : reminder),
                 selected: null
             }
+        case DELETE_REMINDER:
+            return {
+                all: _.filter(state.all, reminder => reminder.id !== state.selected.id),
+                selected: null
+            }
         default:
             return state;
     }

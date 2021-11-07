@@ -1,4 +1,4 @@
-import {SELECT_REMINDER, EDIT_REMINDER, SAVE_REMINDER} from "../../constants/actionTypes";
+import {SELECT_REMINDER, EDIT_REMINDER, SAVE_REMINDER, DELETE_REMINDER} from "../../constants/actionTypes";
 
 const selectReminder = (reminder) => {
     return {
@@ -21,4 +21,11 @@ const saveReminder = () => {
     }
 }
 
-export { selectReminder, editReminder, saveReminder}
+const deleteReminder = (reminder) => {
+    return {
+        type: DELETE_REMINDER,
+        payload: reminder
+    }
+}
+
+export { selectReminder, editReminder, saveReminder, deleteReminder}

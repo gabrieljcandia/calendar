@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
-import {selectReminder, editReminder, saveReminder} from "../../store/reminder/action";
+import {selectReminder, editReminder, saveReminder, deleteReminder} from "../../store/reminder/action";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import {Col} from "react-bootstrap";
 import {dateToHourMin, dateToIsoString} from "../../utils/date-utils";
 import _ from "lodash";
 import MenuItem from '@mui/material/MenuItem';
@@ -73,8 +74,16 @@ const ReminderModal = () => {
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => closeModal()}>Cancel</Button>
-                    <Button onClick={() => dispatch(saveReminder())}>Save</Button>
+                    <Col>
+                        {showDeleteButton
+                            ? <Button onClick={() => dispatch(deleteReminder(reminder))}>Delete</Button>
+                            : <></>
+                        }
+                    </Col>
+                    <Col>
+                        <Button onClick={() => closeModal()}>Cancel</Button>
+                        <Button onClick={() => dispatch(saveReminder())}>Save</Button>
+                    </Col>
                 </DialogActions>
             </Dialog>
         </>
