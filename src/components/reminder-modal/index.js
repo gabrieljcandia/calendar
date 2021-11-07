@@ -13,11 +13,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import colors, {defaultColor} from "../../constants/colors";
+import './styles.css';
 
 const ReminderModal = () => {
     const dispatch = useDispatch();
     const reminder = useSelector(state => state.reminder.selected);
-    const show = reminder != null;
 
     const updateValue = (key, value) => {
         reminder[key] = value;
@@ -25,13 +25,19 @@ const ReminderModal = () => {
     }
 
     const closeModal = () => dispatch(selectReminder(null));
+
+    const showModal = reminder != null;
+    const showDeleteButton = reminder?.id != null;
     const currentColor = reminder?.color != null ? reminder.color : defaultColor;
+    const currentTitle = reminder?.title != null ? reminder.title : "";
+    const currentTime = reminder?.time != null ? reminder.time : dateToHourMin(new Date());
+    const currentDate = reminder?.date != null ? dateToIsoString(reminder.date) : dateToIsoString(new Date());
 
     return (
         <>
             <Dialog
                 maxWidth="sm"
-                open={show}
+                open={showModal}
                 onClose={() => closeModal()}
             >
                 <DialogTitle>Reminder</DialogTitle>
@@ -43,17 +49,17 @@ const ReminderModal = () => {
                         type="text"
                         fullWidth
                         variant="standard"
-                        defaultValue={reminder?.title != null ? reminder.title : ""}
+                        defaultValue={currentTitle}
                     />
                     <br/><br/>
                     <TextField
                         type="date"
-                        defaultValue={reminder?.date != null ? dateToIsoString(reminder.date) : dateToIsoString(new Date())}
+                        defaultValue={currentDate}
                         onChange={e => updateValue('date', new Date(e.target.value))}
                     />
                     <TextField
                         type="time"
-                        defaultValue={reminder?.time != null ? reminder.time : dateToHourMin(new Date())}
+                        defaultValue={currentTime}
                         onChange={e => updateValue('time', e.target.value)}
                     />
                     <FormControl>
@@ -73,7 +79,7 @@ const ReminderModal = () => {
                         </Select>
                     </FormControl>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className="bottomButtons">
                     <Col>
                         {showDeleteButton
                             ? <Button onClick={() => dispatch(deleteReminder(reminder))}>Delete</Button>
