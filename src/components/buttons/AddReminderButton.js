@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {selectReminder} from "../../store/reminder/action";
 import './styles.css';
 
-const AddRemainderButton = () => {
+const AddReminderButton = () => {
     const dispatch = useDispatch();
 
     return (
@@ -16,4 +16,4 @@ const AddRemainderButton = () => {
     );
 }
 
-export default AddRemainderButton;
+export default AddReminderButton;
