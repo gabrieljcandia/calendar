@@ -44,6 +44,8 @@ tbody tr {
     vertical-align: top;
 }
 
-.day {
-
+.today {
+    border-color: lavender;
+    border-radius: 10px;
+    border-bottom-style: groove;
 }

@@ -16,6 +16,7 @@ const Day = (props) => {
     const todayRemindersOrdered = _.orderBy(todayReminders, ['time']);
 
     const noHoveredClass = sameMonth(props.day, currentDay) ? "sameMonth" : "otherMonth";
+    const todayClass = sameDay(props.day, new Date()) ? "today" : "";
 
     return (
         <td
@@ -24,7 +25,7 @@ const Day = (props) => {
             className={hovered ? "hovered" : noHoveredClass}
             onClick={() => dispatch(selectReminder({date: props.day}))}
         >
-            <p className="dateNumber">{`${props.day.getDate()}`}</p>
+            <p className={todayClass}>{`${props.day.getDate()}`}</p>
             {todayRemindersOrdered.map(reminder =>
                 <Reminder key={reminder.id} reminder={reminder}/>
             )}
