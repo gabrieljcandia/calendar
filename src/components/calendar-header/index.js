@@ -1,7 +1,5 @@
 import React from "react";
 import {increaseCurrentMonth, decreaseCurrentMonth} from "../../store/date/action";
-import {selectCurrentDate} from "../../store/date/reducer";
-import {connect} from "react-redux";
 import {Row, Col} from 'react-bootstrap';
 import {dateToMonthEnUs} from "../../utils/date-utils";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -10,17 +8,23 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Fab} from "@mui/material";
 import './styles.css';
+import {useDispatch, useSelector} from "react-redux";
 
-const CalendarHeader = ({currentDate, increaseCurrentMonth, decreaseCurrentMonth}) => {
+const CalendarHeader = () => {
+    const dispatch = useDispatch();
+    const currentDate = useSelector(state => state.date);
     const monthName = dateToMonthEnUs(currentDate);
+
+    const increaseMonth = (amount) => dispatch(increaseCurrentMonth(amount));
+    const decreaseMonth = (amount) => dispatch(decreaseCurrentMonth(amount));
 
     return (
         <Row fluid="true" className="calendarHeader">
             <Col>
-                <Fab onClick={() => decreaseCurrentMonth(12)}>
+                <Fab onClick={() => decreaseMonth(12)}>
                     <ArrowBackIosIcon />
                 </Fab>
-                <Fab onClick={() => decreaseCurrentMonth(1)} size="small">
+                <Fab onClick={() => decreaseMonth(1)} size="small">
                     <ArrowBackIcon />
                 </Fab>
             </Col>
@@ -28,10 +32,10 @@ const CalendarHeader = ({currentDate, increaseCurrentMonth, decreaseCurrentMonth
                 {`${monthName} ${currentDate.getFullYear()}`}
             </Col>
             <Col>
-                <Fab onClick={() => increaseCurrentMonth(1)} size="small">
+                <Fab onClick={() => increaseMonth(1)} size="small">
                     <ArrowForwardIcon />
                 </Fab>
-                <Fab onClick={() => increaseCurrentMonth(12)}>
+                <Fab onClick={() => increaseMonth(12)}>
                     <ArrowForwardIosIcon />
                 </Fab>
             </Col>
@@ -39,10 +43,4 @@ const CalendarHeader = ({currentDate, increaseCurrentMonth, decreaseCurrentMonth
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        currentDate: selectCurrentDate(state)
-    }
-}
-
-export default connect(mapStateToProps, {increaseCurrentMonth, decreaseCurrentMonth})(CalendarHeader);
+export default CalendarHeader;

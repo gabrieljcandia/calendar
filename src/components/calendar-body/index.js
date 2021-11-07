@@ -1,8 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import {getDatesAfterMonth, getDatesBeforeMonth, getDatesOfMonth} from "./logic";
-import {selectCurrentDate} from "../../store/date/reducer";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import DaysOfWeek from "./DaysOfWeek";
 import Day from "./Day";
 import './styles.css';
@@ -11,7 +10,8 @@ export const ROWS = 6;
 export const DAYS_OF_WEEK_COUNT = 7;
 export const NUMBER_OF_DAYS_TO_DISPLAY = ROWS * DAYS_OF_WEEK_COUNT;
 
-const CalendarBody = ({currentDate}) => {
+const CalendarBody = () => {
+    const currentDate = useSelector(state => state.date);
     const datesBeforeMonth = getDatesBeforeMonth(currentDate);
     const datesOfMonth = getDatesOfMonth(currentDate);
     const datesAfterMonth = getDatesAfterMonth(currentDate);
@@ -45,10 +45,4 @@ const DaysRow = ({days}) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        currentDate: selectCurrentDate(state)
-    }
-}
-
-export default connect(mapStateToProps)(CalendarBody);
+export default CalendarBody;

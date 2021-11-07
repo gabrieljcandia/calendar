@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import dateReducer from './date/reducer'
+import date from './date/reducer'
 import reminder from './reminder/reducer'
 
 const reducers = combineReducers({
-    dateReducer,
+    date,
     reminder
 });
 
