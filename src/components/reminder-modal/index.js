@@ -26,12 +26,17 @@ const ReminderModal = () => {
 
     const closeModal = () => dispatch(selectReminder(null));
 
+    const handleSaveButton = () => {
+        if (reminder?.title?.length <= 30) dispatch(saveReminder());
+    }
+
     const showModal = reminder != null;
     const showDeleteButton = reminder?.id != null;
     const currentColor = reminder?.color != null ? reminder.color : defaultColor;
     const currentTitle = reminder?.title != null ? reminder.title : "";
     const currentTime = reminder?.time != null ? reminder.time : dateToHourMin(new Date());
     const currentDate = reminder?.date != null ? dateToIsoString(reminder.date) : dateToIsoString(new Date());
+    const titleWarning = reminder?.title?.length > 30;
 
     return (
         <>
@@ -50,6 +55,8 @@ const ReminderModal = () => {
                         fullWidth
                         variant="standard"
                         defaultValue={currentTitle}
+                        error={titleWarning}
+                        helperText={titleWarning ? "Up to 30 characters" : ""}
                     />
                     <br/><br/>
                     <TextField
@@ -88,7 +95,7 @@ const ReminderModal = () => {
                     </Col>
                     <Col>
                         <Button onClick={() => closeModal()}>Cancel</Button>
-                        <Button onClick={() => dispatch(saveReminder())}>Save</Button>
+                        <Button onClick={() => handleSaveButton()}>Save</Button>
                     </Col>
                 </DialogActions>
             </Dialog>
