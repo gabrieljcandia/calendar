@@ -23,6 +23,11 @@ tbody tr {
     text-align: start;
 }
 
+.hoveredTask {
+    text-align: start;
+    background: skyblue;
+}
+
 .hovered {
     background: cornflowerblue;
     border-color: white;

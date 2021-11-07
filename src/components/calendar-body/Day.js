@@ -35,11 +35,14 @@ const Day = (props) => {
 
 const Reminder = ({reminder}) => {
     const dispatch = useDispatch();
+    const [hovered, setHovered] = useState(false);
 
     return (
         <div
             onMouseDown={() => dispatch(selectReminder({...reminder}))}
-            className="task"
+            className={hovered ? "hoveredTask" : "task"}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
         >
             <Chip
                 style={{background: reminder.color}}
