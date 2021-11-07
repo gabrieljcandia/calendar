@@ -1,6 +1,7 @@
 import {EDIT_REMINDER, SELECT_REMINDER, SAVE_REMINDER} from "../../constants/actionTypes";
 import {dateToHourMin} from "../../utils/date-utils";
 import _ from "lodash";
+import {defaultColor} from "../../constants/colors";
 
 let reminderId = 0;
 
@@ -20,7 +21,8 @@ const reducer = (state = initialState, action) => {
                 selected: {
                     ...action.payload,
                     date: action.payload.date != null ? action.payload.date : new Date(),
-                    time: action.payload.time != null ? action.payload.time : dateToHourMin(new Date())
+                    time: action.payload.time != null ? action.payload.time : dateToHourMin(new Date()),
+                    color: action.payload.color != null ? action.payload.color : defaultColor
                 }
             };
         case EDIT_REMINDER:

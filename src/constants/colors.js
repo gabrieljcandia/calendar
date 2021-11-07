@@ -7,4 +7,6 @@ const colors = [
     "violet"
 ];
 
+export const defaultColor = colors[0];
+
 export default colors;

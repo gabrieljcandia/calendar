@@ -11,7 +11,7 @@ import _ from "lodash";
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import colors from "../../constants/colors";
+import colors, {defaultColor} from "../../constants/colors";
 
 const ReminderModal = () => {
     const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const ReminderModal = () => {
     }
 
     const closeModal = () => dispatch(selectReminder(null));
+    const currentColor = reminder?.color != null ? reminder.color : defaultColor;
 
     return (
         <>
@@ -46,7 +47,7 @@ const ReminderModal = () => {
                     <br/><br/>
                     <TextField
                         type="date"
-                        defaultValue={dateToIsoString(new Date())}
+                        defaultValue={reminder?.date != null ? dateToIsoString(reminder.date) : dateToIsoString(new Date())}
                         onChange={e => updateValue('date', new Date(e.target.value))}
                     />
                     <TextField
@@ -56,8 +57,8 @@ const ReminderModal = () => {
                     />
                     <FormControl>
                         <Select
-                            defaultValue={reminder?.color != null ? reminder.color : colors[0]}
-                            style={{color: reminder?.color != null ? reminder.color : colors[0]}}
+                            defaultValue={currentColor}
+                            style={{color: currentColor}}
                         >
                             {colors.map(color =>
                                 <MenuItem
