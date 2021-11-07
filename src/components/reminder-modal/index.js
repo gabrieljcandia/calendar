@@ -72,7 +72,7 @@ const ReminderModal = () => {
                     />
                     <FormControl>
                         <Select
-                            defaultValue={currentColor}
+                            value={currentColor}
                             style={{color: currentColor}}
                         >
                             {colors.map(color =>
